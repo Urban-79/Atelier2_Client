@@ -10,10 +10,10 @@ import java.net.SocketAddress;
 import java.net.UnknownHostException;
 import java.util.Scanner;
 
-public class Main {
+public class JHeadOrTailServer {
 
     private final static String SERVER = "127.0.0.1";
-    private final static int PORT = 0x2BAD;
+    private final static int PORT = 0x2BAE;
     private final static int TIMEOUT = 30000;
 
     public static void main(String[] args) throws UnknownHostException, IOException {
@@ -29,20 +29,19 @@ public class Main {
 
             System.out.printf("You're player %d\n", num);
             for(;;) {
-                System.out.print("H:Head, T:Tail or Q:Quit : ");
-                String content = sc.next().toLowerCase();
+                System.out.print("P:Pierre, F:Feuille, C:Ciseaux or Q:Quit : ");
+                String content = sc.next().toUpperCase();
 
-                if(content.equals("q")) {
+                if(content.equals("Q")) {
                     break;
                 }
-                else if ("h".equals(content) || "t".equals(content)) {
-                    writer.writeBoolean(content.equals("h"));
+                else if ("P".equals(content) || "F".equals(content) || "C".equals(content)) {
+                    writer.writeChars(content);
                     writer.flush();
 
-                    boolean is_head = reader.readBoolean();
                     int score_num = reader.readInt();
 
-                    System.out.printf("It was %s, here are the scores :\n", is_head ? "HEAD" : "TAIL");
+                    System.out.printf("Here are the scores :\n");
                     for (var i = 1; i <= score_num; i++) {
                         int score = reader.readInt();
 
