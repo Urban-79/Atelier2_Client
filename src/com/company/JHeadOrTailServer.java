@@ -36,7 +36,8 @@ public class JHeadOrTailServer {
                     break;
                 }
                 else if ("P".equals(content) || "F".equals(content) || "C".equals(content)) {
-                    writer.writeChars(content);
+                    char c = content.charAt(0);
+                    writer.writeChar(c);
                     writer.flush();
 
                     int score_num = reader.readInt();
